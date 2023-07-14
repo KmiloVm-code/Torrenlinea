@@ -11,7 +11,7 @@ const MostSelledProducts = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 max-w-screen-xl gap-10 mb-5">
+      <div className="grid grid-cols-3 px-10 max-w-screen-xl gap-10 mb-12">
         <ProductPostCard />
         <ProductPostCard />
         <ProductPostCard />
