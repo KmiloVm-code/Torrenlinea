@@ -1,3 +1,4 @@
+import Header from '../../components/Header'
 import Menu from '../../components/Menu'
 import Navbar from '../../components/Navbar'
 
@@ -6,6 +7,7 @@ const Home = () => {
     <div className='w-screen'>
       <Navbar />
       <Menu />
+      <Header />
     </div>
   )
 }
