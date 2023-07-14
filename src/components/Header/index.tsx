@@ -11,7 +11,7 @@ const Header = () => {
             <span className='font-semibold'>Oferta</span>
 
             <div className='flex px-4 py-1 items-center bg-black rounded-full gap-2'>
-              <BoltIcon className='w-5 h-5 text-cyan-500' />
+              <BoltIcon className='w-5 h-5 text-primary-500' />
               <span className=' text-white'> FULL</span>
             </div>
           </p>
@@ -25,14 +25,14 @@ const Header = () => {
 
         <div className='grid grid-flow-col justify-stretch gap-10'>
           <div className='flex items-center'>
-            <div className='flex flex-col p-4 items-center bg-yellow-400 rounded-full w-full h-20'>
+            <div className='flex flex-col p-4 items-center bg-secondary rounded-full w-full h-20'>
               <span className='font-semibold'>OFERTAS HASTA</span>
               <span className='font-bold'>25% OFF</span>
             </div>
           </div>
 
           <div className='flex items-center'>
-            <div className='flex flex-col p-4 items-center bg-yellow-400 rounded-full w-full h-20'>
+            <div className='flex flex-col p-4 items-center bg-secondary rounded-full w-full h-20'>
               <span className='font-semibold'>ENVÍOS NACIONALES</span>
               <img src={Shipping} alt="shipping" className='w-6 h-6' />
             </div>
