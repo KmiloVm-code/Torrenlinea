@@ -16,7 +16,7 @@ const ProductPostCard = () => {
         <p className="bg-primary-200 rounded-lg py-3 px-5">
           <span className="text-lg font-medium text-primary-600">$145.000</span>
         </p>
-        
+
       </div>
     </div>
   )

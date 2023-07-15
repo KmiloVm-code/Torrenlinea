@@ -1,3 +1,4 @@
+import Brands from '../../components/Brands'
 import Categories from '../../components/Categories'
 import Header from '../../components/Header'
 import Menu from '../../components/Menu'
@@ -12,6 +13,7 @@ const Home = () => {
       <Header />
       <MostSelledProducts />
       <Categories />
+      <Brands />
     </div>
   )
 }
