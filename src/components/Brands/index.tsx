@@ -43,7 +43,7 @@ const Brands = () => {
 
       <div className="flex gap-5">
         {brands.map(brand => (
-          <figure key={brand.id} className="flex justify-center items-center w-32 h-32 bg-white rounded-full">
+          <figure key={brand.id} className="flex justify-center items-center w-32 h-24 bg-white rounded-full">
             <img src={brand.image} alt={brand.name} className="w-full h-full object-contain" />
           </figure>
         ))}
