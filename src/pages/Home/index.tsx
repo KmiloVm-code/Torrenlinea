@@ -8,7 +8,7 @@ import Navbar from '../../components/Navbar'
 
 const Home = () => {
   return (
-    <div className='w-screen'>
+    <>
       <Navbar />
       <Menu />
       <Header />
@@ -16,7 +16,7 @@ const Home = () => {
       <Categories />
       <Brands />
       <Footer />
-    </div>
+    </>
   )
 }
 

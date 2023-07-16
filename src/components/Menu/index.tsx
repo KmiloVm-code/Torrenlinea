@@ -1,29 +1,45 @@
 
 const Menu = () => {
+
+  const categories = [
+    {
+      id: 1,
+      name: 'Accesorios',
+    },
+    {
+      id: 2,
+      name: 'Cargadores',
+    },
+    {
+      id: 3,
+      name: 'Audio',
+    },
+    {
+      id: 4,
+      name: 'Smartwatch',
+    },
+    {
+      id: 5,
+      name: 'Videojuegos',
+    }
+  ]
+
   return (
-    <ul className='flex p-4 ml-3 justify-start items-center gap-4 text-lg font-medium'>
-      <li className='cursor-pointer hover:text-gray-800/80'>
-        Inicio
-      </li>
-      <li className='cursor-pointer hover:text-gray-800/80'>
-        Todos los productos
-      </li>
-      <li className='cursor-pointer hover:text-gray-800/80'>
-        Accesorios
-      </li>
-      <li className='cursor-pointer hover:text-gray-800/80'>
-        Cargadores
-      </li>
-      <li className='cursor-pointer hover:text-gray-800/80'>
-        Audio
-      </li>
-      <li className='cursor-pointer hover:text-gray-800/80'>
-        Smartwatch
-      </li>
-      <li className='cursor-pointer hover:text-gray-800/80'>
-        Video Juegos
-      </li>
-    </ul>
+    <div className="bg-gray-900">
+      <ul className='flex p-4 ml-14 justify-start items-center gap-5 text-lg text-white font-medium'>
+        <li className='cursor-pointer hover:text-primary-500'>
+          Inicio
+        </li>
+        <li className='cursor-pointer hover:text-primary-500'>
+          Todos los productos
+        </li>
+        {categories.map(category => (
+          <li key={category.id} className='cursor-pointer hover:text-primary-500'>
+            {category.name}
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
