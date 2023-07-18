@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 
 const Menu = () => {
 
@@ -28,14 +29,20 @@ const Menu = () => {
     <div className="bg-gray-900">
       <ul className='flex p-4 ml-14 justify-start items-center gap-5 text-lg text-white font-medium'>
         <li className='cursor-pointer hover:text-primary-500'>
-          Inicio
+          <NavLink to='/'>
+            Inicio
+          </NavLink>
         </li>
         <li className='cursor-pointer hover:text-primary-500'>
-          Todos los productos
+          <NavLink to='/tienda'>
+            Todos los productos
+          </NavLink>
         </li>
         {categories.map(category => (
           <li key={category.id} className='cursor-pointer hover:text-primary-500'>
-            {category.name}
+            <NavLink to={`/tienda/${category.name}`} >
+              {category.name}
+            </NavLink>
           </li>
         ))}
       </ul>
