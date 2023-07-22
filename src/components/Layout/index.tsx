@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { ProductDetailProvider } from "../../contexts/ProductDetailContext";
 
 interface LayoutProps {
   children: ReactNode;
@@ -6,9 +7,11 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex flex-col items-center my-16">
-      {children}
-    </div>
+    <ProductDetailProvider>
+      <div className="flex flex-col items-center my-16">
+        {children}
+      </div>
+    </ProductDetailProvider>
   )
 }
 

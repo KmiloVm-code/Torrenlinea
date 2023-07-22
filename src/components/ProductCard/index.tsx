@@ -1,10 +1,18 @@
+import { useContext } from "react";
+import { ProductDetailContext } from "../../contexts/ProductDetailContext";
 
 const ProductCard = (props: any) => {
-  console.log(props);
+  
+  const productDetailContext = useContext(ProductDetailContext);
+
+  const handleProductDetail = () => {
+    productDetailContext.openModal();
+    productDetailContext.setProductDetailShow(props.product);
+  };
   
   return (
     // product card whit product photo, title, price, quantity, add cart button
-    <div className="flex flex-col justify-between items-center border border-black/10 bg-white rounded-md shadow-md p-2 w-72 h-96">
+    <div className="flex flex-col justify-between items-center border border-black/10 bg-white rounded-md shadow-md p-2 w-72 h-96" onClick={() => handleProductDetail()}>
       <figure className="flex justify-center items-center w-32 h-32 mt-2">
         <img src={props.product.image} alt={props.product.title} className="w-full h-full object-contain" />
       </figure>
