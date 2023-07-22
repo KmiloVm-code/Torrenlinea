@@ -5,16 +5,14 @@ import CategoriesCard from '../CategoriesCard'
 
 const Categories = () => {
   return (
-    <div className='flex flex-col justify-center items-center mb-5 bg-primary-500'>
-      <h1 className='text-3xl font-bold mb-3 mt-6'>CATEGORÍAS</h1>
-      <p className='text-2xl font-semibold mb-5'>¡Envió seguro, paga contra entrega!</p>
+    <div className='flex flex-col justify-center items-center mb-5 p-6 bg-primary-500'>
+      <h1 className='text-xl md:text-3xl font-bold mb-3 mt-6'>CATEGORÍAS</h1>
+      <p className='text-xl md:text-2xl font-semibold mb-5'>¡Envío seguro, paga contra entrega!</p>
 
-      <div className='grid grid-cols-3 gap-7 p-6 mb-6 max-w-screen-xl'>
-
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 p-4 md:p-6 mb-6 max-w-screen-xl'>
         <CategoriesCard title='CABLES – CARGADORES' logo={Cables} />
-        <CategoriesCard title='AIRPODS-SMARTWACHT' logo={Smartwacht} />
+        <CategoriesCard title='AIRPODS-SMARTWATCH' logo={Smartwacht} />
         <CategoriesCard title='ACCESORIOS' logo={Accesories} />
-
       </div>
     </div>
   )

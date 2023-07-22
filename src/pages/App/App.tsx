@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Menu from '../../components/Menu';
 import Shop from '../Shop';
+import { NavbarProvider } from '../../contexts/NavbarContext';
 
 function App() {
 
@@ -18,10 +19,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
-      <Menu />
-      <AppRoutes />
-      <Footer />
+      <NavbarProvider>
+        <Navbar />
+        <Menu />
+        <AppRoutes />
+        <Footer />
+      </NavbarProvider>
     </BrowserRouter>
   )
 }

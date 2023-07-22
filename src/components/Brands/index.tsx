@@ -36,19 +36,20 @@ const Brands = () => {
 
   return (
     // Icon sidebar for well-known brands such as huawei, apple, sony, samsung, jbl, xiaomi
-    <div className="flex flex-col justify-center items-center mb-10 mt-10">
+    <div className="flex flex-col justify-center items-center mb-6 md:mb-10 mt-6 md:mt-10">
 
-      <h1 className="text-2xl font-bold mb-5">DISTRIBUIMOS GRANDES MARCAS</h1>
-      <p className="text-lg font-medium mb-10">Accesorios para celulares, pc gamers y más…</p>
+      <h1 className="text-lg md:text-2xl font-bold mb-3 md:mb-5">DISTRIBUIMOS GRANDES MARCAS</h1>
+      <p className="text-base md:text-lg font-medium mb-6 md:mb-10">Accesorios para celulares, PC gamers y más…</p>
 
-      <div className="flex gap-5">
+      <div className="flex flex-wrap justify-center gap-3 md:gap-5">
         {brands.map(brand => (
-          <figure key={brand.id} className="flex justify-center items-center w-32 h-24 bg-white rounded-full">
+          <figure key={brand.id} className="flex justify-center items-center w-20 md:w-32 h-16 md:h-24 bg-white rounded-full">
             <img src={brand.image} alt={brand.name} className="w-full h-full object-contain" />
           </figure>
         ))}
       </div>
     </div>
+
   )
 }
 
