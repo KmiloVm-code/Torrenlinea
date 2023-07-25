@@ -24,7 +24,7 @@ export const ProductDetailProvider = ({ children }: any) => {
           closeModal,
           openModal,
           prductDetailShow,
-          setProductDetailShow
+          setProductDetailShow,
         }
       }>
 

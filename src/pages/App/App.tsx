@@ -6,6 +6,8 @@ import Footer from '../../components/Footer';
 import Menu from '../../components/Menu';
 import Shop from '../Shop';
 import { NavbarProvider } from '../../contexts/NavbarContext';
+import Cart from '../Cart';
+import { ShoppingCartProvider } from '../../contexts/ShoppingCartContext';
 
 function App() {
 
@@ -13,6 +15,7 @@ function App() {
     let routes = useRoutes([
       { path: '/', element: <Home /> },
       { path: '/tienda', element: <Shop /> },
+      { path: '/carrito', element: <Cart /> },
     ]);
     return routes;
   };
@@ -20,10 +23,12 @@ function App() {
   return (
     <BrowserRouter>
       <NavbarProvider>
+        <ShoppingCartProvider>
         <Navbar />
         <Menu />
         <AppRoutes />
         <Footer />
+        </ShoppingCartProvider>
       </NavbarProvider>
     </BrowserRouter>
   )

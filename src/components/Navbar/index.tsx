@@ -2,6 +2,7 @@ import { UserIcon, ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/reac
 import Logo from '../../assets/logo.png'
 import { useContext } from 'react';
 import { NavbarContext } from '../../contexts/NavbarContext';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -38,9 +39,11 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800/80 cursor-pointer">
-            <ShoppingBagIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
-          </div>
+          <NavLink to='/carrito'>
+            <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800/80 cursor-pointer">
+              <ShoppingBagIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            </div>
+          </NavLink>
         </div>
       </nav>
     </div>
