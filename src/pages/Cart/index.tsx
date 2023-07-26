@@ -7,17 +7,17 @@ const Cart = () => {
 
   const shoppingCartContext = useContext(ShoppingCartContext);
 
-  const  products  = shoppingCartContext.products;
+  const products = shoppingCartContext.products;
 
   return (
-    <div className="container mx-auto h-full mt-7 mb-16">
+    <div className="container p-5 h-full mt-7 mb-16">
       <h2 className="text-2xl text-center font-semibold">Carrito de Compras</h2>
-      <div className="flex items-center gap-5 mt-5">
-        <table className="table w-3/4 border-separate border-spacing-10">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mt-5 items-start">
+        <table className="table md:col-span-2 border-separate border-spacing-9 w-full">
           <thead className="table-header-group">
             <tr className="table-row">
-              <th className="table-cell text-center">Imagen</th>
-              <th className="table-cell text-center">Nombre</th>
+              <th className="table-cell text-center">Product</th>
+              <th className="table-cell text-center"></th>
               <th className="table-cell text-center">Precio</th>
               <th className="table-cell text-center">Cantidad</th>
               <th className="table-cell text-center">Subtotal</th>
@@ -26,13 +26,13 @@ const Cart = () => {
           </thead>
           <tbody className="table-row-group">
             {products.map(product => (
-              <tr className="table-row " key={product.id}>
+              <tr className="table-row" key={product.id}>
                 <td className="table-cell">
                   <figure className="flex justify-center w-12 h-12">
                     <img src={product.image} alt={product.title} className="w-full h-full object-contain" />
                   </figure>
                 </td>
-                <td className="table-cell text-center text-base font-medium">{product.title}</td>
+                <td className="table-cell text-base font-medium">{product.title}</td>
                 <td className="table-cell text-center text-sm font-medium text-gray-700">${product.price}</td>
                 <td className="table-cell text-center text-base font-medium">
                   <div className="flex items-center justify-center gap-2">
@@ -49,17 +49,34 @@ const Cart = () => {
             ))}
           </tbody>
         </table>
-        <div>
-          <h3 className="text-xl font-semibold">Resumen</h3>
-          <div className="bg-white p-4 rounded-md shadow-md">
-            <p className="text-gray-600">Subtotal: $100</p>
-            <p className="text-gray-600">Envío: $10</p>
-            <p className="text-gray-600">Total: $110</p>
-            <button className="bg-blue-500 px-3 py-1 rounded-md mt-4">
-              Pagar
+
+        <div className="flex flex-col justify-start p-6 md:p-10 col-span-1 rounded-lg bg-gray-100">
+          <h3 className="text-2xl font-semibold mb-6">Resumen del Carrito</h3>
+
+          <div className="border-y border-y-gray-400 py-7 mb-4">
+
+            <div className="flex justify-between mb-6">
+              <p className="text-lg font-normal">Subtotal</p>
+              <p className="text-lg font-medium">$100</p>
+            </div>
+
+            <div className="flex justify-between mb-6">
+              <p className="text-lg font-normal">Envío</p>
+              <p className="text-lg font-medium">Gratis</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center gap-5">
+            <p className="flex justify-between text-lg font-medium">
+              <span>Total</span>
+              <span>$100</span>
+            </p>
+            <button className="bg-primary-500 text-lg font-medium text-white rounded-lg py-3 hover:bg-primary-600">
+              Proceder al pago
             </button>
           </div>
         </div>
+
       </div>
     </div>
   )
