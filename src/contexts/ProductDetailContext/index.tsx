@@ -4,17 +4,18 @@ export const ProductDetailContext = createContext({} as any);
 
 export const ProductDetailProvider = ({ children }: any) => {
 
+  const [prductDetailShow, setProductDetailShow] = useState({});
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
     setIsOpen(false);
+    setProductDetailShow({});
   };
 
   const openModal = () => {
     setIsOpen(true);
   };
 
-  const [prductDetailShow, setProductDetailShow] = useState({});
 
   return (
     <ProductDetailContext.Provider

@@ -10,9 +10,9 @@ const Cart = () => {
   const products = shoppingCartContext.products;
 
   return (
-    <div className="container p-5 h-full mt-7 mb-16">
+    <div className="flex flex-col p-10 h-full mt-7 mb-16">
       <h2 className="text-2xl text-center font-semibold">Carrito de Compras</h2>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mt-5 items-start">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 items-start">
         <table className="table md:col-span-2 border-separate border-spacing-9 w-full">
           <thead className="table-header-group">
             <tr className="table-row">
@@ -50,14 +50,14 @@ const Cart = () => {
           </tbody>
         </table>
 
-        <div className="flex flex-col justify-start p-6 md:p-10 col-span-1 rounded-lg bg-gray-100">
-          <h3 className="text-2xl font-semibold mb-6">Resumen del Carrito</h3>
+        <div className="flex flex-col justify-start p-6 md:p-10 md:col-span-2 lg:col-span-1 rounded-lg bg-gray-100">
+          <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-6">Resumen del Carrito</h3>
 
           <div className="border-y border-y-gray-400 py-7 mb-4">
 
             <div className="flex justify-between mb-6">
               <p className="text-lg font-normal">Subtotal</p>
-              <p className="text-lg font-medium">$100</p>
+              <p className="text-lg font-medium">${shoppingCartContext.totalPrice()}</p>
             </div>
 
             <div className="flex justify-between mb-6">
@@ -69,7 +69,7 @@ const Cart = () => {
           <div className="flex flex-col justify-center gap-5">
             <p className="flex justify-between text-lg font-medium">
               <span>Total</span>
-              <span>$100</span>
+              <span>${shoppingCartContext.totalPrice()}</span>
             </p>
             <button className="bg-primary-500 text-lg font-medium text-white rounded-lg py-3 hover:bg-primary-600">
               Proceder al pago

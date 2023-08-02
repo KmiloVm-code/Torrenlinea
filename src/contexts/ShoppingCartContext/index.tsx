@@ -14,6 +14,8 @@ interface ShoppingCartContextType {
   addProduct: (product: Product) => void;
   deleteProduct: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
+  countShoppingCartItems: () => number;
+  totalPrice: () => number;
 }
 
 export const ShoppingCartContext = createContext<ShoppingCartContextType>({
@@ -21,6 +23,8 @@ export const ShoppingCartContext = createContext<ShoppingCartContextType>({
   addProduct: () => {},
   deleteProduct: () => {},
   updateQuantity: () => {},
+  countShoppingCartItems: () => 0,
+  totalPrice: () => 0
 });
 
 export const ShoppingCartProvider = ({ children }: any) => {
@@ -51,11 +55,26 @@ export const ShoppingCartProvider = ({ children }: any) => {
     );
   };
 
+  const countShoppingCartItems = () => {
+    // Cuenta la cantidad de productos en el carrito
+    return products.reduce((acc, product) => acc + product.quantity, 0);
+  };
+
+  const totalPrice = () => {
+    // Calcula el precio total del carrito
+    return products.reduce(
+      (acc, product) => acc + product.price * product.quantity,
+      0
+    );
+  };
+
   const value = {
     products,
     addProduct,
     deleteProduct,
     updateQuantity,
+    countShoppingCartItems,
+    totalPrice
   };
 
   return (

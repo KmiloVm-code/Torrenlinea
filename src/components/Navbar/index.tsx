@@ -3,10 +3,13 @@ import Logo from '../../assets/logo.png'
 import { useContext } from 'react';
 import { NavbarContext } from '../../contexts/NavbarContext';
 import { NavLink } from 'react-router-dom';
+import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 
 const Navbar = () => {
 
   const navBarContext = useContext(NavbarContext);
+
+  const shoppingCartContext = useContext(ShoppingCartContext);
 
   return (
     <div className='sticky top-0 bg-gray-900'>
@@ -40,8 +43,13 @@ const Navbar = () => {
           </div>
 
           <NavLink to='/carrito'>
-            <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800/80 cursor-pointer">
+            <div className="flex items-center justify-end w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800/80 cursor-pointer">
+              <div className='absolute flex justify-center items-center w-4 h-4 p-3 top-3 bg-primary-500 rounded-full'>
+                <p className='text-xs font-bold'>{shoppingCartContext.countShoppingCartItems()}</p>
+              </div>
+              <div className='flex items-center justify-center w-full h-full'>
               <ShoppingBagIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+              </div>
             </div>
           </NavLink>
         </div>
