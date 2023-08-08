@@ -1,13 +1,5 @@
 import { createContext, useState } from "react";
-import useProductQuantity from "../../hooks/useProductQuantity";
-
-type Product = {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
-  quantity: number;
-};
+import { Product } from "../../models/Product";
 
 interface ShoppingCartContextType {
   products: Product[];
@@ -63,7 +55,7 @@ export const ShoppingCartProvider = ({ children }: any) => {
   const totalPrice = () => {
     // Calcula el precio total del carrito
     return products.reduce(
-      (acc, product) => acc + product.price * product.quantity,
+      (acc, product) => acc + parseInt(product.price) * product.quantity,
       0
     );
   };

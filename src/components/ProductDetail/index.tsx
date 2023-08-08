@@ -26,13 +26,13 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2">
           <div className="p-6 sm:p-10 m-auto">
             <figure className="flex justify-center items-center w-1/2 sm:w-3/4 mx-auto mb-8">
-              <img src={productDetailContext.prductDetailShow.image} alt={productDetailContext.prductDetailShow.title} className="w-full h-full object-contain" />
+              {productDetailContext.prductDetailShow.images && <img src={productDetailContext.prductDetailShow.images[0].src} alt={productDetailContext.prductDetailShow?.images} className="w-full h-full object-contain" />}
             </figure>
           </div>
 
           <div className="bg-primary-100 p-6 sm:p-10 flex flex-col justify-between items-center sm:items-start">
             <div >
-              <h1 className="text-2xl font-bold mb-2">{productDetailContext.prductDetailShow.title}</h1>
+              <h1 className="text-2xl font-bold mb-2">{productDetailContext.prductDetailShow.name}</h1>
               <p className="text-lg font-bold text-gray-600 mb-4">${productDetailContext.prductDetailShow.price}</p>
               <p className="text-lg font-normal text-gray-700 mb-6">{productDetailContext.prductDetailShow.description}</p>
             </div>

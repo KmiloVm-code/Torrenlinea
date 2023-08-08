@@ -29,10 +29,10 @@ const Cart = () => {
               <tr className="table-row" key={product.id}>
                 <td className="table-cell">
                   <figure className="flex justify-center w-12 h-12">
-                    <img src={product.image} alt={product.title} className="w-full h-full object-contain" />
+                    <img src={product.images[0].src} alt={product.name} className="w-full h-full object-contain" />
                   </figure>
                 </td>
-                <td className="table-cell text-base font-medium">{product.title}</td>
+                <td className="table-cell text-base font-medium">{product.name}</td>
                 <td className="table-cell text-center text-sm font-medium text-gray-700">${product.price}</td>
                 <td className="table-cell text-center text-base font-medium">
                   <div className="flex items-center justify-center gap-2">
@@ -41,7 +41,7 @@ const Cart = () => {
                     <button className="bg-primary-100 px-3 py-1 rounded-md" onClick={() => shoppingCartContext.updateQuantity(product.id, product.quantity + 1)}>+</button>
                   </div>
                 </td>
-                <td className="table-cell text-center font-medium">${product.price * product.quantity}</td>
+                <td className="table-cell text-center font-medium">${parseInt(product.price) * product.quantity}</td>
                 <td className="table-cell text-center font-medium">
                   <XMarkIcon className="h-6 w-6 text-danger cursor-pointer" onClick={() => shoppingCartContext.deleteProduct(product.id)} />
                 </td>

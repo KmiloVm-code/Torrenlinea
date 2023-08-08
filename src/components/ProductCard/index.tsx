@@ -11,6 +11,7 @@ const ProductCard = (props: any) => {
   const handleProductDetail = () => {
     productDetailContext.openModal();
     productDetailContext.setProductDetailShow(props.product);
+    console.log(props.product);
   };
 
   const { quantity, increment, decrement } = useProductQuantity();
@@ -25,11 +26,11 @@ const ProductCard = (props: any) => {
     <div className="flex flex-col justify-between items-center border border-black/10 bg-white rounded-md shadow-md p-2 w-64 sm:w-72 h-80 sm:h-96">
 
       <figure className="flex justify-center items-center w-32 h-32 mt-2" onClick={() => {handleProductDetail()}}>
-        <img src={props.product.image} alt={props.product.title} className="w-full h-full object-contain" />
+        <img src={props.product.images[0].src} alt={props.product.images[0].alt} className="w-full h-full object-contain" />
       </figure>
 
       <div className="flex flex-col px-3 gap-3">
-        <h1 className="text-base sm:text-lg font-semibold">{props.product.title}</h1>
+        <h1 className="text-base sm:text-lg font-semibold">{props.product.name}</h1>
         <p className="text-lg sm:text-xl font-medium">${props.product.price}</p>
       </div>
 
