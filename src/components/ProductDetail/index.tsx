@@ -9,11 +9,16 @@ const ProductDetail = () => {
   const shoppingCartContext = useContext(ShoppingCartContext);
   const productDetailContext = useContext(ProductDetailContext);
 
-  const { quantity, increment, decrement } = useProductQuantity();
+  const { quantity, increment, decrement, clear } = useProductQuantity();
   
   const addCart = () => {
     productDetailContext.prductDetailShow.quantity = quantity;
     shoppingCartContext.addProduct(productDetailContext.prductDetailShow);
+  };
+  
+  const closeModal = () => {
+    productDetailContext.closeModal();
+    clear();
   };
 
   return (
@@ -21,7 +26,7 @@ const ProductDetail = () => {
     <div className={`${productDetailContext.isOpen ? 'fixed' : 'hidden'} fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center`}>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-screen-lg w-full max-sm:h-full">
 
-        <XMarkIcon className="absolute h-8 w-8 text-black/80 cursor-pointer m-2" onClick={() => productDetailContext.closeModal()} />
+        <XMarkIcon className="absolute h-8 w-8 text-black/80 cursor-pointer m-2" onClick={() => closeModal()} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2">
           <div className="p-6 sm:p-10 m-auto">
