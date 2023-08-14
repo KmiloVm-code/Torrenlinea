@@ -4,7 +4,7 @@ type State = {
   quantity: number;
 };
 
-type Action = { type: "INCREMENT" } | { type: "DECREMENT" };
+type Action = { type: "INCREMENT" } | { type: "DECREMENT" } | { type: "CLEAR" };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -16,12 +16,14 @@ const reducer = (state: State, action: Action): State => {
       } else {
         return state;
       }
+    case "CLEAR":
+      return { quantity: 1 };
     default:
       return state;
   }
 };
 
-const useProductQuantity = (): { quantity: number; increment: () => void; decrement: () => void } => {
+const useProductQuantity = (): { quantity: number; increment: () => void; decrement: () => void; clear: () => void } => {
   const [state, dispatch] = useReducer(reducer, { quantity: 1 });
 
   const increment = (): void => {
@@ -32,10 +34,15 @@ const useProductQuantity = (): { quantity: number; increment: () => void; decrem
     dispatch({ type: "DECREMENT" });
   };
 
+  const clear = (): void => {
+    dispatch({ type: "CLEAR" });
+  };
+
   return {
     quantity: state.quantity,
     increment,
     decrement,
+    clear,
   };
 };
 
