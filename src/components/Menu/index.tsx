@@ -1,33 +1,13 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom"
 import { NavbarContext } from "../../contexts/NavbarContext";
+import { useFetchCategories } from "../../api/useFetchCategories";
 
 const Menu = () => {
 
   const navBarContext = useContext(NavbarContext);
 
-  const categories = [
-    {
-      id: 1,
-      name: 'Accesorios',
-    },
-    {
-      id: 2,
-      name: 'Cargadores',
-    },
-    {
-      id: 3,
-      name: 'Audio',
-    },
-    {
-      id: 4,
-      name: 'Smartwatch',
-    },
-    {
-      id: 5,
-      name: 'Videojuegos',
-    }
-  ]
+  const { categories, isLoading, error } = useFetchCategories();
 
   return (
     <div className={`${navBarContext.isMenuOpen ? 'flex' : 'hidden'} md:flex flex-col h-screen md:h-auto p-4 md:pl-14 bg-gray-900`}>
@@ -42,9 +22,11 @@ const Menu = () => {
             Todos los productos
           </NavLink>
         </li>
-        {categories.map(category => (
+        {isLoading && <p>Loading...</p>}
+        {error && <p>Something went wrong</p>}
+        {categories.filter(category => category.name !== 'Uncategorized').map(category => (
           <li key={category.id}>
-            <NavLink to={`/tienda/${category.name}`} >
+            <NavLink to={`/tienda/${category.slug}`} >
               {category.name}
             </NavLink>
           </li>
@@ -60,7 +42,6 @@ const Menu = () => {
         </li>
       </ul>
     </div>
-
   )
 }
 

@@ -16,6 +16,7 @@ function App() {
       { path: '/', element: <Home /> },
       { path: '/tienda', element: <Shop /> },
       { path: '/carrito', element: <Cart /> },
+      { path: '*', element: <h1>Not found</h1> },
     ]);
     return routes;
   };
