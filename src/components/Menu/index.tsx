@@ -24,9 +24,9 @@ const Menu = () => {
         </li>
         {isLoading && <p>Loading...</p>}
         {error && <p>Something went wrong</p>}
-        {categories.filter(category => category.name !== 'Uncategorized').map(category => (
+        {categories?.filter(category => category.name !== 'Uncategorized').map(category => (
           <li key={category.id}>
-            <NavLink to={`/tienda/${category.slug}`} >
+            <NavLink to={`/tienda/${category.slug}`}>
               {category.name}
             </NavLink>
           </li>

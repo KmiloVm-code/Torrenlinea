@@ -8,6 +8,7 @@ import Shop from '../Shop';
 import { NavbarProvider } from '../../contexts/NavbarContext';
 import Cart from '../Cart';
 import { ShoppingCartProvider } from '../../contexts/ShoppingCartContext';
+import { ProductProvider } from '../../contexts/ProductContext';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     let routes = useRoutes([
       { path: '/', element: <Home /> },
       { path: '/tienda', element: <Shop /> },
+      { path: '/tienda/:category', element: <Shop /> },
       { path: '/carrito', element: <Cart /> },
       { path: '*', element: <h1>Not found</h1> },
     ]);
@@ -25,10 +27,12 @@ function App() {
     <BrowserRouter>
       <NavbarProvider>
         <ShoppingCartProvider>
-        <Navbar />
-        <Menu />
-        <AppRoutes />
-        <Footer />
+          <Navbar />
+          <ProductProvider>
+            <Menu />
+            <AppRoutes />
+          </ProductProvider>
+          <Footer />
         </ShoppingCartProvider>
       </NavbarProvider>
     </BrowserRouter>
