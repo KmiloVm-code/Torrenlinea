@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { NavbarContext } from '../../contexts/NavbarContext';
 import { NavLink } from 'react-router-dom';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
+import SearchBar from '../SearchBar';
 
 const Navbar = () => {
 
@@ -27,8 +28,8 @@ const Navbar = () => {
           <p className='text-white text-lg font-medium'>Torrenlinea</p>
         </div>
 
-        <div className="hidden md:flex items-center w-2/5">
-          <input type="text" placeholder="Buscar en Torrenlinea.com" className="w-full h-10 px-4 rounded-full bg-gray-800/80 text-white" />
+        <div className='hidden md:flex items-center w-2/5'>
+          <SearchBar />
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
@@ -48,12 +49,16 @@ const Navbar = () => {
                 <p className='text-xs font-bold'>{shoppingCartContext.countShoppingCartItems()}</p>
               </div>
               <div className='flex items-center justify-center w-full h-full'>
-              <ShoppingBagIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                <ShoppingBagIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
             </div>
           </NavLink>
         </div>
+
       </nav>
+      <div className='flex md:hidden items-center px-5 mt-2'>
+        <SearchBar />
+      </div>
     </div>
   )
 }
