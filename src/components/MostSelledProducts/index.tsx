@@ -1,6 +1,14 @@
+import { useContext } from "react"
+import { ProductContext } from "../../contexts/ProductContext"
 import ProductPostCard from "../ProductPostCard"
+import { Link } from "react-router-dom";
 
 const MostSelledProducts = () => {
+
+  const productContext = useContext(ProductContext);
+  const { products, isLoading, error } = productContext;
+
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="mb-8">
@@ -12,9 +20,13 @@ const MostSelledProducts = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 px-4 md:px-10 max-w-screen-xl gap-6 mb-12">
-        <ProductPostCard />
-        <ProductPostCard />
-        <ProductPostCard />
+        {isLoading && <p>Cargando...</p>}
+        {error && <p>Ha ocurrido un error</p>}
+        {products.slice(0, 3).map(product => (
+          <Link to={`/producto/${product.slug}`} key={product.id}>
+          <ProductPostCard key={product.id} product={product} />
+          </Link>
+        ))}
       </div>
     </div>
   )
