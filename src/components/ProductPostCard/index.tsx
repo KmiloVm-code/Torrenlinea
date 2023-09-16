@@ -1,17 +1,9 @@
 import { Product } from "../../models/Product";
+import { formatPrice } from "../../utils/formatcurrencyUtils";
 
 interface ProductCardProps {
   product: Product;
 }
-
-  // format price to COP currency without decimals
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
 
 const ProductPostCard = ({ product }: ProductCardProps) => {
   return (

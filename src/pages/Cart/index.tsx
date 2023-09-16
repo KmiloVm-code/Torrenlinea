@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import ProductShoppingCard from "../../components/ProductShoppingCard";
 import { Product } from "../../models/Product";
+import { formatPrice } from "../../utils/formatcurrencyUtils";
 
 const Cart = () => {
   const shoppingCartContext = useContext(ShoppingCartContext);
@@ -32,7 +33,7 @@ const Cart = () => {
           <div className="border-y border-y-gray-400 py-7 mb-4">
             <div className="flex justify-between mb-6">
               <p className="text-lg font-normal">Subtotal</p>
-              <p className="text-lg font-medium">${totalPrice}</p>
+              <p className="text-lg font-medium">{formatPrice(totalPrice)}</p>
             </div>
             <div className="flex justify-between mb-6">
               <p className="text-lg font-normal">Envío</p>
@@ -42,7 +43,7 @@ const Cart = () => {
           <div className="flex flex-col justify-center gap-5">
             <p className="flex justify-between text-lg font-medium">
               <span>Total</span>
-              <span>${totalPrice}</span>
+              <span>{formatPrice(totalPrice)}</span>
             </p>
             <button className="bg-primary-500 text-lg font-medium text-white rounded-lg py-3 hover:bg-primary-600">
               Proceder al pago

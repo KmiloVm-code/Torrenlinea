@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import useProductQuantity from "../../hooks/useProductQuantity";
 import { ProductContext } from "../../contexts/ProductContext";
+import { formatPrice } from "../../utils/formatcurrencyUtils";
 
 const ProductPage = () => {
 
@@ -38,7 +39,7 @@ const ProductPage = () => {
         <div className="flex flex-col md:w-1/2 md:ml-6 mt-4 md:mt-0 gap-8 tracking-tighter">
 
           <h1 className="text-4xl font-bold">{product?.name}</h1>
-          <div className="text-2xl font-semibold text-gray-900" dangerouslySetInnerHTML={{ __html: product?.price_html ?? '' }} />
+          <p className="text-2xl font-semibold text-gray-800" >{formatPrice(parseInt(product?.price ?? '0'))}</p>
           <div className="text-gray-800 font-normal sm:text-lg" dangerouslySetInnerHTML={{ __html: product?.short_description ?? '' }} />
 
           <div className="flex items-center mt-2 py-5 border-b-2 border-gray-200 pr-5 mb-8">

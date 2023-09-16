@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import useProductQuantity from "../../hooks/useProductQuantity";
 import { Product } from "../../models/Product";
+import { formatPrice } from "../../utils/formatcurrencyUtils";
 
 interface ProductCardProps {
   product: Product;
@@ -28,7 +29,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         <div className="flex flex-col px-3 gap-3">
           <h1 className="text-base sm:text-lg font-semibold">{product.name}</h1>
-          <p className="text-lg sm:text-xl font-semibold text-gray-700">${product.price}</p>
+          <p className="text-lg sm:text-xl font-semibold text-gray-700">{formatPrice(parseInt(product.price))}</p>
         </div>
       </Link>
 
