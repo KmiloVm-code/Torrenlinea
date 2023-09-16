@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useFetchProducts } from "../../api/useFetchProducts";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const Index = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -40,9 +41,7 @@ const Index = () => {
           autoComplete="off"
           onChange={handleSearch}
         />
-        <svg className="h-4 w-4 absolute right-6 top-3 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-        </svg>
+        <MagnifyingGlassIcon className="h-4 w-4 absolute right-6 top-3 text-gray-400" aria-hidden="true" />
         {searchValue.length > 2 && (
           <div className="absolute z-10 w-full border rounded-lg shadow divide-y max-h-72 overflow-y-auto bg-white mt-1">
             {renderSearchResults()}
