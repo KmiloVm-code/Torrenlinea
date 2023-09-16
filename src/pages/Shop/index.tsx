@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import Layout from "../../components/Layout"
 import ProductCard from "../../components/ProductCard"
-import ProductDetail from "../../components/ProductDetail"
 import { ProductContext } from "../../contexts/ProductContext"
 
 const Shop = () => {
@@ -29,7 +28,6 @@ const Shop = () => {
         {renderProducts()}
       </div>
 
-      <ProductDetail />
     </Layout>
   )
 }

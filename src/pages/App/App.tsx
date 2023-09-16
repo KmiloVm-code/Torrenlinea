@@ -9,6 +9,7 @@ import { NavbarProvider } from '../../contexts/NavbarContext';
 import Cart from '../Cart';
 import { ShoppingCartProvider } from '../../contexts/ShoppingCartContext';
 import { ProductProvider } from '../../contexts/ProductContext';
+import Product from '../Product';
 
 function App() {
 
@@ -17,6 +18,8 @@ function App() {
       { path: '/', element: <Home /> },
       { path: '/tienda', element: <Shop /> },
       { path: '/tienda/:category', element: <Shop /> },
+      { path: '/producto', element: <Product />},
+      { path: '/producto/:slug', element: <Product />},
       { path: '/carrito', element: <Cart /> },
       { path: '*', element: <h1>Not found</h1> },
     ]);
