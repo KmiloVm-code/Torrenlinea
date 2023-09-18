@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom"
 import { NavbarContext } from "../../contexts/NavbarContext";
-import { useFetchCategories } from "../../api/useFetchCategories";
+import { CategoryContext } from "../../contexts/Categorycontext";
 
 const Menu = () => {
   const { isMenuOpen, toggleMenu } = useContext(NavbarContext);
-  const { categories, isLoading, error } = useFetchCategories();
+  const { categories, isLoading, error } = useContext(CategoryContext);
 
   return (
     <div className={`flex ${isMenuOpen ? '' : 'hidden'} md:flex flex-col h-screen md:h-auto p-4 md:pl-14 bg-gray-900`}>
@@ -22,7 +22,7 @@ const Menu = () => {
         </li>
         {isLoading && <p>Loading...</p>}
         {error && <p>Something went wrong</p>}
-        {categories?.filter(category => category.name !== 'Uncategorized').map(category => (
+        {categories?.map(category => (
           <li key={category.id} onClick={toggleMenu}>
             <NavLink to={`/tienda/${category.slug}`}>
               {category.name}

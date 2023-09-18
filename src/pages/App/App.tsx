@@ -10,6 +10,7 @@ import Cart from '../Cart';
 import { ShoppingCartProvider } from '../../contexts/ShoppingCartContext';
 import { ProductProvider } from '../../contexts/ProductContext';
 import Product from '../Product';
+import { CategoryProvider } from '../../contexts/Categorycontext';
 
 function App() {
 
@@ -18,8 +19,8 @@ function App() {
       { path: '/', element: <Home /> },
       { path: '/tienda', element: <Shop /> },
       { path: '/tienda/:category', element: <Shop /> },
-      { path: '/producto', element: <Product />},
-      { path: '/producto/:slug', element: <Product />},
+      { path: '/producto', element: <Product /> },
+      { path: '/producto/:slug', element: <Product /> },
       { path: '/carrito', element: <Cart /> },
       { path: '*', element: <h1>Not found</h1> },
     ]);
@@ -31,10 +32,12 @@ function App() {
       <NavbarProvider>
         <ShoppingCartProvider>
           <Navbar />
-          <ProductProvider>
-            <Menu />
-            <AppRoutes />
-          </ProductProvider>
+          <CategoryProvider>
+            <ProductProvider>
+              <Menu />
+              <AppRoutes />
+            </ProductProvider>
+          </CategoryProvider>
           <Footer />
         </ShoppingCartProvider>
       </NavbarProvider>

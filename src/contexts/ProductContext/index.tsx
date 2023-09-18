@@ -1,8 +1,8 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode, useContext } from "react";
 import { Product } from "../../models/Product";
 import { useLocation } from "react-router-dom";
-import { useFetchCategories } from "../../api/useFetchCategories";
 import useFetchProducts from "../../api/useFetchProducts";
+import { CategoryContext } from "../Categorycontext";
 
 interface ProductContextType {
   products: Product[];
@@ -24,14 +24,14 @@ export const ProductContext = createContext<ProductContextType>({
   setSelectedCategory: () => {},
 });
 
-export const ProductProvider = ({ children } : ProductProviderProps) => {
+export const ProductProvider = ({ children }: ProductProviderProps) => {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const { pathname } = useLocation();
   const lastSegment = pathname.split('/').pop();
-  const { categories } = useFetchCategories();
+  const { categories } = useContext(CategoryContext);
 
   useEffect(() => {
-    const category = categories.find(category => category.slug === lastSegment);
+    const category = categories.find((category) => category.slug === lastSegment);
     setSelectedCategory(category?.id || 0);
   }, [categories, lastSegment]);
 
@@ -39,21 +39,21 @@ export const ProductProvider = ({ children } : ProductProviderProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-
   useEffect(() => {
-    setIsLoading(true);
-    useFetchProducts(selectedCategory === 0 ? '' : `category=${selectedCategory}`)
-      .then((products) => {
-        setProducts(products);
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      try {
+        const fetchedProducts = await useFetchProducts(selectedCategory === 0 ? "" : `category=${selectedCategory}`);
+        setProducts(fetchedProducts);
+      } catch (error) {
+        setError(error as Error);
+      } finally {
         setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
-      console.log(products);
-  }, [selectedCategory]);
+      }
+    };
 
+    fetchProducts();
+  }, [selectedCategory]);
 
   const value: ProductContextType = {
     products,
@@ -63,10 +63,5 @@ export const ProductProvider = ({ children } : ProductProviderProps) => {
     setSelectedCategory,
   };
 
-  return (
-    <ProductContext.Provider value={value}>
-      {children}
-    </ProductContext.Provider>
-  );
+  return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>;
 };
-
