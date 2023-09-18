@@ -5,20 +5,20 @@ import { Product } from "../../models/Product";
 
 const Index = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [products, setProducts] = useState<Product[]>([]);
+  const [resultProducts, setResultProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const url = `${import.meta.env.VITE_API_URL}products/?search=${searchValue}`;
   
   useEffect (() => {
     let isMounted = true;
 
     const fetchData = async () => {
       setIsLoading(true);
-      useFetchProducts(url)
+      useFetchProducts(`search=${searchValue}`)
         .then((products) => {
           if (isMounted) {
-            setProducts(products);
+            console.log(products);
+            setResultProducts(products);
             setIsLoading(false);
           }
         })
@@ -33,7 +33,7 @@ const Index = () => {
     if (searchValue.length >= 3) {
       fetchData();
     } else {
-      setProducts([]);
+      setResultProducts([]);
     }
 
     return () => {
@@ -55,7 +55,7 @@ const Index = () => {
       return <p className="p-2">Ocurrió un error al buscar los productos</p>;
     }
 
-    if (products.length === 0) {
+    if (resultProducts.length === 0) {
       return (
         <a className="block p-2 hover:bg-indigo-50 cursor-pointer" key="no-results">
           No se encontraron resultados
@@ -63,7 +63,7 @@ const Index = () => {
       );
     }
 
-    return products.map((product) => (
+    return resultProducts.map((product) => (
       <a className="block p-2 hover:bg-gray-200 cursor-pointer" key={product.id} href="#">
         <figure className="flex gap-3 items-center">
           <img src={product.images[0].src} alt={product.name} className="w-10 h-10" />
