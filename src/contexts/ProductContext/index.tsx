@@ -1,8 +1,8 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
-import { useFetchProducts } from "../../api/useFetchProducts";
 import { Product } from "../../models/Product";
 import { useLocation } from "react-router-dom";
 import { useFetchCategories } from "../../api/useFetchCategories";
+import useFetchProducts from "../../api/useFetchProducts";
 
 interface ProductContextType {
   products: Product[];
@@ -35,8 +35,25 @@ export const ProductProvider = ({ children } : ProductProviderProps) => {
     setSelectedCategory(category?.id || 0);
   }, [categories, lastSegment]);
 
-  const url = `${import.meta.env.VITE_API_URL}products${selectedCategory ? `?category=${selectedCategory}` : ''}`;
-  const { products, isLoading, error } = useFetchProducts(url);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+
+  useEffect(() => {
+    setIsLoading(true);
+    useFetchProducts(selectedCategory === 0 ? '' : `category=${selectedCategory}`)
+      .then((products) => {
+        setProducts(products);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setIsLoading(false);
+      });
+      console.log(products);
+  }, [selectedCategory]);
+
 
   const value: ProductContextType = {
     products,

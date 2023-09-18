@@ -1,11 +1,45 @@
-import { useState } from "react";
-import { useFetchProducts } from "../../api/useFetchProducts";
+import { useEffect, useState } from "react";
+import useFetchProducts from "../../api/useFetchProducts";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Product } from "../../models/Product";
 
 const Index = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
   const url = `${import.meta.env.VITE_API_URL}products/?search=${searchValue}`;
-  const { products } = useFetchProducts(url);
+  
+  useEffect (() => {
+    let isMounted = true;
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      useFetchProducts(url)
+        .then((products) => {
+          if (isMounted) {
+            setProducts(products);
+            setIsLoading(false);
+          }
+        })
+        .catch((error) => {
+          if (isMounted) {
+            setError(error);
+            setIsLoading(false);
+          }
+        });
+    };
+
+    if (searchValue.length >= 3) {
+      fetchData();
+    } else {
+      setProducts([]);
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [searchValue]);
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     const searchValue = e.target.value;
@@ -13,6 +47,14 @@ const Index = () => {
   }
 
   function renderSearchResults() {
+    if (isLoading) {
+      return <p className="p-2">Buscando productos...</p>;
+    }
+
+    if (error) {
+      return <p className="p-2">Ocurrió un error al buscar los productos</p>;
+    }
+
     if (products.length === 0) {
       return (
         <a className="block p-2 hover:bg-indigo-50 cursor-pointer" key="no-results">
@@ -32,7 +74,7 @@ const Index = () => {
   }
 
   return (
-    <div className="w-full">
+<div className="w-full">
       <div className="relative">
         <input
           type="search"

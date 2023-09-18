@@ -15,9 +15,6 @@ export const ProductDetailProvider = ({ children }: any) => {
 
   const [prductDetailShow, setProductDetailShow] = useState<Product[]>({} as Product[]);
 
-
-  console.log(prductDetailShow);
-
   const value = {
     prductDetailShow,
     setProductDetailShow,
