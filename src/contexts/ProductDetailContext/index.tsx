@@ -1,7 +1,6 @@
 import { createContext, useReducer } from "react";
 import { Product } from "../../models/Product";
 import useFetchProducts from "../../api/useFetchProducts";
-import { Link, NavLink } from "react-router-dom";
 
 interface ProductDetailContextType {
   productDetail: Product | null;
