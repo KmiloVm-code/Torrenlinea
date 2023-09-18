@@ -11,6 +11,7 @@ import { ShoppingCartProvider } from '../../contexts/ShoppingCartContext';
 import { ProductProvider } from '../../contexts/ProductContext';
 import Product from '../Product';
 import { CategoryProvider } from '../../contexts/Categorycontext';
+import { ProductDetailProvider } from '../../contexts/ProductDetailContext';
 
 function App() {
 
@@ -35,7 +36,9 @@ function App() {
           <CategoryProvider>
             <ProductProvider>
               <Menu />
+              <ProductDetailProvider>
               <AppRoutes />
+              </ProductDetailProvider>
             </ProductProvider>
           </CategoryProvider>
           <Footer />
