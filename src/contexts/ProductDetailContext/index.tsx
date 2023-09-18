@@ -1,61 +1,73 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { Product } from "../../models/Product";
 import useFetchProducts from "../../api/useFetchProducts";
+import { ProductContext } from "../ProductContext";
+import { Link } from "react-router-dom";
 
 interface ProductDetailContextType {
   productDetail: Product | null;
   loadDetails: (slug: string) => void;
+  isLoading: boolean;
+  error: Error | null;
 }
 
-export const ProductDetailContext = createContext<ProductDetailContextType>({
+const initialState: ProductDetailContextType = {
   productDetail: null,
   loadDetails: () => {},
-});
+  isLoading: false,
+  error: null,
+};
 
-interface ProductDetailProviderProps {
-  children: React.ReactNode;
-}
-
-const initialState: Product | null = null;
-
-const productDetailReducer = (state: Product | null, action: any) => {
+const productDetailReducer = (
+  state: ProductDetailContextType,
+  action: { type: string; payload?: any }
+): ProductDetailContextType => {
   switch (action.type) {
     case "SET_PRODUCT_DETAIL":
-      return action.payload;
+      return { ...state, productDetail: action.payload };
+    case "SET_LOADING":
+      return { ...state, isLoading: action.payload };
+    case "SET_ERROR":
+      return { ...state, error: action.payload };
     default:
       return state;
   }
 };
 
+export const ProductDetailContext = createContext<ProductDetailContextType>(initialState);
+
+interface ProductDetailProviderProps {
+  children: React.ReactNode;
+}
+
 export const ProductDetailProvider = ({ children }: ProductDetailProviderProps) => {
-  const [productDetail, dispatch] = useReducer(
-    productDetailReducer,
-    initialState
-  );
+  const { products } = useContext(ProductContext);
+  const [state, dispatch] = useReducer(productDetailReducer, initialState);
 
-  const loadDetails = async (slug: string) => {
-    if (productDetail?.slug === slug) {
-      return; // Los detalles ya están cargados, no es necesario cargar nuevamente
-    }
-
-    try {
-      // Si los detalles no están cargados, realiza la solicitud
-      const products = await useFetchProducts(`slug=${slug}`);
-      const product = products.find((product: { slug: string }) => product.slug === slug);
-      if (!product) {
-        // Si no se encuentra el producto, redirige a la página de error 404
-        window.location.href = "/404";
-      }
+  // Función para cargar los detalles de un producto por su slug (URL), verificar primero si el producto ya está en el estado global de productos (products) y si no está, entonces hacer la petición a la API para obtenerlo
+  const loadDetails = (slug: string) => {
+    const product = products.find((product) => product.slug === slug);
+    if (product) {
       dispatch({ type: "SET_PRODUCT_DETAIL", payload: product });
-    } catch (error) {
-      console.error("Error al cargar los detalles del producto:", error);
-      throw new Error("Error al cargar los detalles del producto");
+    } else {
+      dispatch({ type: "SET_LOADING", payload: true });
+      useFetchProducts(`slug=${slug}`)
+        .then((products) => {
+          dispatch({ type: "SET_PRODUCT_DETAIL", payload: products[0] });
+          dispatch({ type: "SET_LOADING", payload: false });
+        })
+        .catch((error) => {
+          dispatch({ type: "SET_ERROR", payload: error });
+          dispatch({ type: "SET_LOADING", payload: false });
+        });
     }
   };
 
   const value = {
-    productDetail,
+    productDetail: state.productDetail,
     loadDetails,
+    isLoading: state.isLoading,
+    error: state.error,
   };
 
   return (

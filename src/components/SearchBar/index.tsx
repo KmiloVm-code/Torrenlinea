@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import useFetchProducts from "../../api/useFetchProducts";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Product } from "../../models/Product";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [searchValue, setSearchValue] = useState("");
   const [resultProducts, setResultProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  
-  useEffect (() => {
+  const [showResults, setShowResults] = useState(false); // Estado para controlar la visibilidad de los resultados
+
+  useEffect(() => {
     let isMounted = true;
 
     const fetchData = async () => {
@@ -41,9 +43,15 @@ const Index = () => {
     };
   }, [searchValue]);
 
+  // Función para manejar clics fuera de la zona de resultados
+  const handleOutsideClick = () => {
+    setShowResults(false);
+  };
+
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     const searchValue = e.target.value;
     setSearchValue(searchValue);
+    setShowResults(searchValue.length >= 3); // Mostrar resultados cuando la longitud de la búsqueda es mayor o igual a 3
   }
 
   function renderSearchResults() {
@@ -64,17 +72,22 @@ const Index = () => {
     }
 
     return resultProducts.map((product) => (
-      <a className="block p-2 hover:bg-gray-200 cursor-pointer" key={product.id} href="#">
+      <Link
+        to={`/producto/${product.slug}`}
+        className="block p-2 hover:bg-indigo-50 cursor-pointer"
+        key={product.id}
+        onClick={handleOutsideClick} // Ocultar resultados al hacer clic en un producto
+      >
         <figure className="flex gap-3 items-center">
           <img src={product.images[0].src} alt={product.name} className="w-10 h-10" />
           <figcaption>{product.name}</figcaption>
         </figure>
-      </a>
+      </Link>
     ));
   }
 
   return (
-<div className="w-full">
+    <div className="w-full relative" onClick={handleOutsideClick}> {/* Manejar clics fuera de la zona de resultados */}
       <div className="relative">
         <input
           type="search"
@@ -84,7 +97,7 @@ const Index = () => {
           onChange={handleSearch}
         />
         <MagnifyingGlassIcon className="h-4 w-4 absolute right-6 top-3 text-gray-400" aria-hidden="true" />
-        {searchValue.length > 2 && (
+        {showResults && searchValue.length > 2 && ( //Mostrar resultados si showResults es true
           <div className="absolute z-10 w-full border rounded-lg shadow divide-y max-h-72 overflow-y-auto bg-white mt-1">
             {renderSearchResults()}
           </div>
@@ -95,4 +108,3 @@ const Index = () => {
 };
 
 export default Index;
-
