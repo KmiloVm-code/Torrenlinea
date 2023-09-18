@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Offer from '../../assets/offer.png';
 
 const Header = () => {
@@ -12,9 +13,11 @@ const Header = () => {
           <p className='text-base md:text-lg font-medium text-center sm:text-start mx-10 sm:mx-0 mb-5'>
             La mejor experiencia de sonido con la mejor calidad de audio
           </p>
+          <Link to='/producto/audifonos-inalambricos-serie-3-magsafe-1-1'>
           <p className='flex justify-center p-2 md:p-3 text-base md:text-lg font-medium rounded-lg border border-primary-500 shadow-md shadow-primary-400 w-full sm:w-fit cursor-pointer'>
             ¡Adquiérelos hoy mismo!
           </p>
+          </Link>
         </div>
       </div>
 
