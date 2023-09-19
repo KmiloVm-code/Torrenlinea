@@ -2,6 +2,7 @@ import { useContext } from "react"
 import Layout from "../../components/Layout"
 import ProductCard from "../../components/ProductCard"
 import { ProductContext } from "../../contexts/ProductContext"
+import ProductCardSkeleton from "../../components/ProductCardSkeleton"
 
 const Shop = () => {
 
@@ -10,7 +11,14 @@ const Shop = () => {
   const renderProducts = () => {
 
     if (isLoading) {
-      return <p>Loading...</p>
+      const skeletonElements = [];
+      const numberOfSkeletons = 10;
+    
+      for (let index = 0; index < numberOfSkeletons; index++) {
+        skeletonElements.push(<ProductCardSkeleton key={index} />);
+      }
+    
+      return <>{skeletonElements}</>;
     }
 
     if (error) {
