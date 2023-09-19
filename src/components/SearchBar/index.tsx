@@ -14,7 +14,7 @@ const Index = () => {
   useEffect(() => {
     let isMounted = true;
 
-    const fetchData = async () => {
+    const FetchData = async () => {
       setIsLoading(true);
       useFetchProducts(`search=${searchValue}`)
         .then((products) => {
@@ -33,7 +33,7 @@ const Index = () => {
     };
 
     if (searchValue.length >= 3) {
-      fetchData();
+      FetchData();
     } else {
       setResultProducts([]);
     }
