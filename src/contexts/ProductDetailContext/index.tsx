@@ -1,8 +1,7 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useMemo } from "react";
 import { Product } from "../../models/Product";
 import useFetchProducts from "../../api/useFetchProducts";
 import { ProductContext } from "../ProductContext";
-import { Link } from "react-router-dom";
 
 interface ProductDetailContextType {
   productDetail: Product | null;
@@ -63,12 +62,12 @@ export const ProductDetailProvider = ({ children }: ProductDetailProviderProps) 
     }
   };
 
-  const value = {
+  const value = useMemo(() => ({
     productDetail: state.productDetail,
     loadDetails,
     isLoading: state.isLoading,
     error: state.error,
-  };
+  }), [state.productDetail, loadDetails, state.isLoading, state.error]);
 
   return (
     <ProductDetailContext.Provider value={value}>
